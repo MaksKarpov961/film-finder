@@ -14,3 +14,15 @@ export const getTopMovie = async value => {
   );
   return data.results;
 };
+
+export const getDetailsMovieData = async moveId => {
+  const { data } = await axios.get(
+    `https://api.themoviedb.org/3/movie/${moveId}`,
+    {
+      headers: {
+        Authorization: API_KEY,
+      },
+    }
+  );
+  return data;
+};

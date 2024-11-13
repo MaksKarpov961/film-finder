@@ -16,8 +16,8 @@ const MovieList = ({ movieList }) => {
     <ul className={s.movi_list}>
       {movieList.map(({ id, title, release_date, poster_path }) => {
         return (
-          <Link className={s.link} key={id}>
-            <li className={s.item}>
+          <li className={s.item} key={id}>
+            <Link to={`/movies/${id}`} className={s.link}>
               <img
                 className={s.img}
                 src={`https://image.tmdb.org/t/p/w200/${poster_path}`}
@@ -27,8 +27,8 @@ const MovieList = ({ movieList }) => {
                 <h2 className={s.title}>{title}</h2>
                 <p className={s.descr}>{formatReleaseDate(release_date)}</p>
               </div>
-            </li>
-          </Link>
+            </Link>
+          </li>
         );
       })}
     </ul>
