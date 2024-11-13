@@ -1,0 +1,42 @@
+.movi_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding-bottom: 25px;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.item {
+  max-width: 200px;
+  box-shadow: 4px 2px 4px rgba(0, 0, 0, 0.3);
+  height: 400px;
+  transition: scale 150ms linear, box-shadow 150ms linear;
+}
+
+.item:hover {
+  scale: 1.03;
+  box-shadow: 7px 7px 5px rgba(0, 0, 0, 0.3);
+}
+.wrapper_text {
+  padding: 10px;
+  text-align: center;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+}
+
+.descr {
+  margin-top: 5px;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+}
