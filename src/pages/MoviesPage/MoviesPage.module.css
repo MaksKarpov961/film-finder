@@ -1,0 +1,25 @@
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.load_more {
+  margin: 0 auto;
+  display: block;
+  color: black;
+  text-decoration: none;
+  padding: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #91a1ff;
+  transition: background-color linear 250ms;
+  border: none;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.load_more:hover,
+.load_more:focus {
+  background-color: #6387ff;
+}

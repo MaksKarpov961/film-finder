@@ -50,3 +50,21 @@ export const getReviewsMovie = async moveId => {
   );
   return data;
 };
+
+export const getSearchMovie = async (query, page) => {
+  const { data } = await axios.get(
+    `https://api.themoviedb.org/3/search/movie`,
+    {
+      headers: {
+        Authorization: API_KEY,
+      },
+      params: {
+        query: query,
+        include_adult: 'true',
+        language: 'en-US',
+        page: page,
+      },
+    }
+  );
+  return data;
+};

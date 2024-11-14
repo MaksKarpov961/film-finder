@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import noteFaundImg from '../../assets/notefaund.jpg';
 import s from './MovieList.module.css';
 const MovieList = ({ movieList }) => {
   if (!movieList) {
@@ -20,7 +21,11 @@ const MovieList = ({ movieList }) => {
             <Link to={`/movies/${id}`} className={s.link}>
               <img
                 className={s.img}
-                src={`https://image.tmdb.org/t/p/w200/${poster_path}`}
+                src={
+                  poster_path
+                    ? `https://image.tmdb.org/t/p/w200/${poster_path}`
+                    : noteFaundImg
+                }
                 alt={title}
               />
               <div className={s.wrapper_text}>
