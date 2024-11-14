@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import s from './MovieDetailsPage.module.css';
-import { Link, useParams } from 'react-router-dom';
+import { Link, Outlet, useParams } from 'react-router-dom';
 import { getDetailsMovieData } from '../../services/api';
 import { TiArrowBack } from 'react-icons/ti';
 const MovieDetailsPage = () => {
@@ -91,6 +91,9 @@ const MovieDetailsPage = () => {
         <Link className={s.link} to="reviews">
           Reviews
         </Link>
+      </div>
+      <div className={s.wrapper_cast_reviews}>
+        <Outlet />
       </div>
     </>
   );

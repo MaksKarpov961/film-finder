@@ -26,3 +26,15 @@ export const getDetailsMovieData = async moveId => {
   );
   return data;
 };
+
+export const getCastMovie = async moveId => {
+  const { data } = await axios.get(
+    `https://api.themoviedb.org/3/movie/${moveId}/credits`,
+    {
+      headers: {
+        Authorization: API_KEY,
+      },
+    }
+  );
+  return data;
+};
