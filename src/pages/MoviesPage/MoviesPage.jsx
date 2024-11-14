@@ -3,6 +3,7 @@ import s from './MoviesPage.module.css';
 import MovieList from '../../components/MovieList/MovieList';
 import { useEffect, useState } from 'react';
 import { getSearchMovie } from '../../services/api';
+import { FaSearch } from 'react-icons/fa';
 
 const MoviesPage = () => {
   const [query, setQuery] = useState('');
@@ -40,9 +41,11 @@ const MoviesPage = () => {
   return (
     <div className={s.container}>
       <Formik initialValues={initionalValues} onSubmit={handleSubmit}>
-        <Form>
-          <Field name="query" placeholder="Search film" />
-          <button type="submite">Search</button>
+        <Form className={s.form}>
+          <Field className={s.input} name="query" placeholder="Search film" />
+          <button className={s.btn_submite} type="submite">
+            <FaSearch />
+          </button>
         </Form>
       </Formik>
       <MovieList movieList={searchMovie} />
