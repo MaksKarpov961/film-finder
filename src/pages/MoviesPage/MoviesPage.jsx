@@ -27,8 +27,18 @@ const MoviesPage = () => {
     setSearchParams({ query: newQuery });
 
     setQuery(newQuery);
+    localStorage.setItem('query', newQuery);
     options.resetForm();
   };
+
+  useEffect(() => {
+    const oldQuery = localStorage.getItem('query');
+    if (oldQuery) {
+      setSearchParams({ query: oldQuery });
+    } else {
+      return;
+    }
+  }, [setSearchParams]);
 
   const urlQuery = searchParams.get('query') || '';
 
@@ -36,6 +46,7 @@ const MoviesPage = () => {
     if (!urlQuery) return;
     setSearchMovie([]);
     setQuery(urlQuery);
+    localStorage.setItem('query', urlQuery);
   }, [urlQuery]);
 
   useEffect(() => {

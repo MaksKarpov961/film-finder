@@ -28,27 +28,31 @@ const MovieCast = () => {
 
   return (
     <>
-      <ul className={s.list}>
-        {movieCast
-          .slice(0, visibleCount)
-          .map(({ id, name, profile_path, character }) => (
-            <li key={id} className={s.item}>
-              <img
-                className={s.img}
-                src={
-                  profile_path
-                    ? `https://image.tmdb.org/t/p/w200/${profile_path}`
-                    : noteFaundImg
-                }
-                alt={name}
-              />
-              <div className={s.wrapper_text}>
-                <h3 className={s.name}>{name}</h3>
-                <h4 className={s.character}>{character}</h4>
-              </div>
-            </li>
-          ))}
-      </ul>
+      {movieCast.length === 0 ? (
+        <div>Unfortunately, there is no information about the cast</div>
+      ) : (
+        <ul className={s.list}>
+          {movieCast
+            .slice(0, visibleCount)
+            .map(({ id, name, profile_path, character }) => (
+              <li key={id} className={s.item}>
+                <img
+                  className={s.img}
+                  src={
+                    profile_path
+                      ? `https://image.tmdb.org/t/p/w200/${profile_path}`
+                      : noteFaundImg
+                  }
+                  alt={name}
+                />
+                <div className={s.wrapper_text}>
+                  <h3 className={s.name}>{name}</h3>
+                  <h4 className={s.character}>{character}</h4>
+                </div>
+              </li>
+            ))}
+        </ul>
+      )}
       {visibleCount < movieCast.length && (
         <button className={s.load_more} onClick={showMore}>
           LoadMore
