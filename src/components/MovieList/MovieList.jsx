@@ -1,11 +1,12 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import noteFaundImg from '../../assets/notefaund.jpg';
 import s from './MovieList.module.css';
-const MovieList = ({ movieList }) => {
+
+const MovieList = ({ movieList, query }) => {
+  const location = useLocation();
   if (!movieList) {
     return;
   }
-
   function formatReleaseDate(dateString) {
     const date = new Date(dateString);
     const year = date.getFullYear();
@@ -18,7 +19,11 @@ const MovieList = ({ movieList }) => {
       {movieList.map(({ id, title, release_date, poster_path }) => {
         return (
           <li className={s.item} key={id}>
-            <Link to={`/movies/${id}`} className={s.link}>
+            <Link
+              to={`/movies/${id}`}
+              className={s.link}
+              state={{ from: location.pathname, query }}
+            >
               <img
                 className={s.img}
                 src={

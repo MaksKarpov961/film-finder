@@ -39,17 +39,15 @@
   align-items: center;
   padding: 5px;
   border-radius: 10px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   background-color: #ffc9c9;
-  width: 80px;
+  width: 95px;
   cursor: pointer;
-  text-decoration: none;
   color: black;
+  font-size: small;
+  border: none;
 }
 
-.back {
-  font-size: small;
-}
 .svg {
   width: 25px;
   height: 25px;

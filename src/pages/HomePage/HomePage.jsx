@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import MovieList from '../../components/MovieList/MovieList';
 import { getTopMovie } from '../../services/api.js';
 import s from './HomePage.module.css';
+
 const HomePage = () => {
   const [topMovie, setTopMovie] = useState([]);
   const [selectedOpt, setSelectedOpt] = useState('day');

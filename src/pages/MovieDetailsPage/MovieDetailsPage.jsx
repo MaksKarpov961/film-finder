@@ -1,11 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import s from './MovieDetailsPage.module.css';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import {
+  Link,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+} from 'react-router-dom';
 import { getDetailsMovieData } from '../../services/api';
 import { TiArrowBack } from 'react-icons/ti';
 const MovieDetailsPage = () => {
   const [detailMoviData, setDetailMovieData] = useState(null);
   const { movieId } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const initialLocationState = useRef(location.state);
+  const query = initialLocationState.current?.query;
 
   useEffect(() => {
     const fetchDetailsMovie = async () => {
@@ -42,13 +52,22 @@ const MovieDetailsPage = () => {
     return formattedDate;
   }
 
+  const handleGoBack = () => {
+    const from = initialLocationState.current?.from;
+    if (from === '/movies') {
+      navigate(`${from}?query=${query}`);
+    } else {
+      navigate('/');
+    }
+  };
+
   return (
     <>
       <div className={s.container}>
-        <Link className={s.wrapper_back} to={'/'}>
+        <button className={s.wrapper_back} onClick={handleGoBack}>
           <TiArrowBack className={s.svg} />
-          <p className={s.back}>Go Back</p>
-        </Link>
+          Go Back
+        </button>
         <div className={s.wrapper_all}>
           <img
             className={s.img}
