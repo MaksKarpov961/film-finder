@@ -15,6 +15,7 @@
   box-shadow: 4px 2px 4px rgba(0, 0, 0, 0.3);
   height: 400px;
   transition: scale 150ms linear, box-shadow 150ms linear;
+  overflow-y: auto;
 }
 
 .item:hover {

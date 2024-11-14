@@ -30,6 +30,7 @@ const MovieDetailsPage = () => {
     runtime,
     vote_average,
     title,
+    status,
   } = detailMoviData;
 
   function getReleseData(release_date) {
@@ -42,40 +43,56 @@ const MovieDetailsPage = () => {
   }
 
   return (
-    <div>
-      <div>
-        <Link to={'/'}>
-          <TiArrowBack />
-          Go Back
+    <>
+      <div className={s.container}>
+        <Link className={s.wrapper_back} to={'/'}>
+          <TiArrowBack className={s.svg} />
+          <p className={s.back}>Go Back</p>
         </Link>
-        <div>
+        <div className={s.wrapper_all}>
           <img
+            className={s.img}
             src={`https://image.tmdb.org/t/p/w300/${poster_path}`}
             alt={title}
           />
-        </div>
-        <div>
-          <h2>{title}</h2>
-          <p>{`User Score: ${((vote_average / 10) * 100).toFixed(0)}%`}</p>
-          <div>
-            <h3>Overviev</h3>
-            <p>{overview}</p>
-          </div>
-          <div>
-            <h3>Genres</h3>
-            <p>{genres.map(item => item.name).join(', ')}</p>
-          </div>
-          <div>
-            <h3>Runtime</h3>
-            <p>{`${runtime} min`}</p>
-          </div>
-          <div>
-            <h3>Release date</h3>
-            <p>{getReleseData(release_date)}</p>
+          <div className={s.wrapper_info_all}>
+            <h2 className={s.title}>{title}</h2>
+            <p className={s.score}>{`User Score: ${(
+              (vote_average / 10) *
+              100
+            ).toFixed(0)}%`}</p>
+            <p className={s.status}>{`Status: ${status}`}</p>
+            <div className={s.wrapper_overiev}>
+              <h3 className={s.overview_title}>Overviev</h3>
+              <p className={s.overview}>{overview}</p>
+            </div>
+            <div className={s.wrapper_genres}>
+              <h3 className={s.genres_title}>Genres</h3>
+              <p className={s.genres}>
+                {genres.map(item => item.name).join(', ')}
+              </p>
+            </div>
+            <div className={s.wrapper_runtime}>
+              <h3 className={s.runtime_title}>Runtime</h3>
+              <p className={s.runtime}>{`${runtime} min`}</p>
+            </div>
+            <div className={s.wrapper_relise}>
+              <h3 className={s.release_title}>Release date</h3>
+              <p className={s.release}>{getReleseData(release_date)}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <div className={s.line}></div>
+      <div className={s.wrapper_link}>
+        <Link className={s.link} to="cast">
+          Cast
+        </Link>
+        <Link className={s.link} to="reviews">
+          Reviews
+        </Link>
+      </div>
+    </>
   );
 };
 
