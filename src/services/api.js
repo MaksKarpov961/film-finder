@@ -38,3 +38,15 @@ export const getCastMovie = async moveId => {
   );
   return data;
 };
+
+export const getReviewsMovie = async moveId => {
+  const { data } = await axios.get(
+    `https://api.themoviedb.org/3/movie/${moveId}/reviews`,
+    {
+      headers: {
+        Authorization: API_KEY,
+      },
+    }
+  );
+  return data;
+};

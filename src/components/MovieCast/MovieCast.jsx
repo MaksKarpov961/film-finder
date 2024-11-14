@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getCastMovie } from '../../services/api';
+import noteFaundImg from '../../assets/notefaund.jpg';
 import s from './MovieCast.module.css';
 
 const MovieCast = () => {
@@ -27,17 +28,24 @@ const MovieCast = () => {
 
   return (
     <>
-      <ul>
+      <ul className={s.list}>
         {movieCast
           .slice(0, visibleCount)
           .map(({ id, name, profile_path, character }) => (
-            <li key={id}>
+            <li key={id} className={s.item}>
               <img
-                src={`https://image.tmdb.org/t/p/w200/${profile_path}`}
-                alt=""
+                className={s.img}
+                src={
+                  profile_path
+                    ? `https://image.tmdb.org/t/p/w200/${profile_path}`
+                    : noteFaundImg
+                }
+                alt={name}
               />
-              <h3>{name}</h3>
-              <h4>{character}</h4>
+              <div className={s.wrapper_text}>
+                <h3 className={s.name}>{name}</h3>
+                <h4 className={s.character}>{character}</h4>
+              </div>
             </li>
           ))}
       </ul>
