@@ -1,7 +1,7 @@
 import { Field, Form, Formik } from 'formik';
 import s from './MoviesPage.module.css';
 import MovieList from '../../components/MovieList/MovieList';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getSearchMovie } from '../../services/api';
 import { FaSearch } from 'react-icons/fa';
 import { useSearchParams } from 'react-router-dom';
@@ -19,7 +19,7 @@ const MoviesPage = () => {
   const [isError, setISError] = useState(false);
   const [errorCode, setErrorCode] = useState('');
 
-  const handleClear = () => {
+  const handleClear = useCallback(() => {
     setSearchMovie([]);
     setQuery('');
     setPage(1);
@@ -27,7 +27,7 @@ const MoviesPage = () => {
     localStorage.removeItem('query');
     setLoadMore(false);
     setISError(false);
-  };
+  }, [setSearchParams]);
 
   const initionalValues = {
     query: '',
@@ -98,7 +98,7 @@ const MoviesPage = () => {
       }
     };
     fetchSearchMovie();
-  }, [query, page]);
+  }, [query, page, handleClear]);
 
   const handleLoadMore = () => {
     setPage(prevPage => prevPage + 1);
