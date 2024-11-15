@@ -6,10 +6,11 @@ import MovieDetailsPage from '../../pages/MovieDetailsPage/MovieDetailsPage';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
 import MovieCast from '../MovieCast/MovieCast';
 import MovieReviews from '../MovieReviews/MovieReviews';
-
+import { Toaster } from 'react-hot-toast';
 const App = () => {
   return (
     <>
+      <Toaster />
       <Navigation />
 
       <Routes>
