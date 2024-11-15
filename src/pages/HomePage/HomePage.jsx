@@ -23,7 +23,6 @@ const HomePage = () => {
         setTopMovie(movieData);
       } catch (error) {
         toast.error(error.message);
-        console.log(error);
 
         setISError(true);
         setErrorCode(`${error.status}`);

@@ -5,6 +5,9 @@ import { useEffect, useState } from 'react';
 import { getSearchMovie } from '../../services/api';
 import { FaSearch } from 'react-icons/fa';
 import { useSearchParams } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import Loader from '../../components/Loader/Loader';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 
 const MoviesPage = () => {
   const [query, setQuery] = useState('');
@@ -12,6 +15,19 @@ const MoviesPage = () => {
   const [searchMovie, setSearchMovie] = useState([]);
   const [loadMore, setLoadMore] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [isLoader, setIsLoader] = useState(false);
+  const [isError, setISError] = useState(false);
+  const [errorCode, setErrorCode] = useState('');
+
+  const handleClear = () => {
+    setSearchMovie([]);
+    setQuery('');
+    setPage(1);
+    setSearchParams({});
+    localStorage.removeItem('query');
+    setLoadMore(false);
+    setISError(false);
+  };
 
   const initionalValues = {
     query: '',
@@ -19,7 +35,7 @@ const MoviesPage = () => {
   const handleSubmit = (values, options) => {
     const newQuery = values.query.trim().toLowerCase();
     if (newQuery === query) {
-      return alert('This request is currently on the screen');
+      return toast.error('This request is currently on the screen');
     }
     setSearchMovie([]);
     setPage(1);
@@ -43,25 +59,32 @@ const MoviesPage = () => {
   const urlQuery = searchParams.get('query') || '';
 
   useEffect(() => {
-    if (!urlQuery) return;
-    setSearchMovie([]);
+    if (!urlQuery) {
+      setSearchMovie([]);
+      setQuery('');
+      return;
+    }
     setQuery(urlQuery);
     localStorage.setItem('query', urlQuery);
   }, [urlQuery]);
 
   useEffect(() => {
+    if (!query) return;
+    setISError(false);
+    setErrorCode('');
     const fetchSearchMovie = async () => {
       try {
-        if (!query) {
-          return;
-        }
-
+        setIsLoader(true);
         const { total_pages, results } = await getSearchMovie(query, page);
         setLoadMore(page < total_pages);
 
         setSearchMovie(prevResult => [...prevResult, ...results]);
       } catch (error) {
-        console.error(error);
+        toast.error(error.message);
+        setISError(true);
+        setErrorCode(`${error.status}`);
+      } finally {
+        setIsLoader(false);
       }
     };
     fetchSearchMovie();
@@ -70,17 +93,26 @@ const MoviesPage = () => {
   const handleLoadMore = () => {
     setPage(prevPage => prevPage + 1);
   };
+
   return (
     <div className={s.container}>
-      <Formik initialValues={initionalValues} onSubmit={handleSubmit}>
-        <Form className={s.form}>
-          <Field className={s.input} name="query" placeholder="Search film" />
-          <button className={s.btn_submite} type="submite">
-            <FaSearch className={s.svg} />
-          </button>
-        </Form>
-      </Formik>
+      <div className={s.form_wrapper}>
+        <Formik initialValues={initionalValues} onSubmit={handleSubmit}>
+          <Form className={s.form}>
+            <Field className={s.input} name="query" placeholder="Search film" />
+            <button className={s.btn_submite} type="submite">
+              <FaSearch className={s.svg} />
+            </button>
+          </Form>
+        </Formik>
+        <button className={s.clear} type="button" onClick={handleClear}>
+          Clear
+        </button>
+      </div>
+
       {query && <MovieList movieList={searchMovie} query={query} />}
+      {isLoader && <Loader type={'magnifyingGlass'} />}
+      {isError && <ErrorMessage type={errorCode} />}
       {loadMore && (
         <button className={s.load_more} type="button" onClick={handleLoadMore}>
           LoadMore
