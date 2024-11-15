@@ -34,6 +34,9 @@ const MoviesPage = () => {
   };
   const handleSubmit = (values, options) => {
     const newQuery = values.query.trim().toLowerCase();
+    if (newQuery === '') {
+      return toast.error('The request cannot be empty');
+    }
     if (newQuery === query) {
       return toast.error('This request is currently on the screen');
     }
@@ -76,6 +79,13 @@ const MoviesPage = () => {
       try {
         setIsLoader(true);
         const { total_pages, results } = await getSearchMovie(query, page);
+
+        if (results.length === 0) {
+          toast.error('No results found for your query.');
+          handleClear();
+
+          return;
+        }
         setLoadMore(page < total_pages);
 
         setSearchMovie(prevResult => [...prevResult, ...results]);
