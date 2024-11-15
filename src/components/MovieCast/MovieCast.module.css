@@ -46,3 +46,9 @@
 .load_more:focus {
   background-color: #6387ff;
 }
+
+@media screen and (max-width: 375px) {
+  .list {
+    justify-content: center;
+  }
+}

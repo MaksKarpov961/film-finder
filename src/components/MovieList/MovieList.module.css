@@ -45,3 +45,9 @@
 .img {
   height: 300px;
 }
+
+@media screen and (max-width: 375px) {
+  .movi_list {
+    justify-content: center;
+  }
+}

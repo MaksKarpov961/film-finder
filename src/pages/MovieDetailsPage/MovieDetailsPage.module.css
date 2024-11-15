@@ -76,3 +76,20 @@
 .link:focus {
   background-color: #dcff7d;
 }
+
+@media screen and (max-width: 375px) {
+  .container {
+    max-width: 375px;
+    margin: 0 auto;
+    padding: 0 10px;
+
+    padding-bottom: 15px;
+  }
+  .img {
+    width: 355px;
+  }
+
+  .wrapper_all {
+    flex-direction: column;
+  }
+}

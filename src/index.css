@@ -27,3 +27,10 @@ img {
   display: block;
   max-width: 100%;
 }
+
+@media screen and (max-width: 375px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+}
