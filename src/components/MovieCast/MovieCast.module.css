@@ -47,7 +47,7 @@
   background-color: #6387ff;
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 420px) {
   .list {
     justify-content: center;
   }
